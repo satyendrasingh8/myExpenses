@@ -8,56 +8,53 @@ class TransationList extends StatelessWidget {
   TransationList(this.transations, this.deleteTx);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 367,
-      child: transations.isEmpty
-          ? Column(
-              children: [
-                SizedBox(
-                  height: 5,
-                ),
-                Text('No transations Added yet!',
-                    style: Theme.of(context).textTheme.title),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    height: 250,
-                    child: Image.asset(
-                      'assets/images/waiting.png',
-                      fit: BoxFit.cover,
-                    )),
-              ],
-            )
-          : ListView.builder(
-              itemBuilder: (ctx, index) {
-                return Card(
-                  elevation: 6,
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: FittedBox(
-                            child: Text('\$${transations[index].amount}')),
-                      ),
+    return transations.isEmpty
+        ? Column(
+            children: [
+              SizedBox(
+                height: 5,
+              ),
+              Text('No transations Added yet!',
+                  style: Theme.of(context).textTheme.headline6),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                  height: 250,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  )),
+            ],
+          )
+        : ListView.builder(
+            itemBuilder: (ctx, index) {
+              return Card(
+                elevation: 6,
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    radius: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: FittedBox(
+                          child: Text('\$${transations[index].amount}')),
                     ),
-                    title: Text(
-                      transations[index].title,
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    subtitle: Text(
-                        DateFormat.yMMMd().format(transations[index].date)),
-                    trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        color: Theme.of(context).errorColor,
-                        onPressed: () => deleteTx(transations[index].id)),
                   ),
-                );
-              },
-              itemCount: transations.length,
-            ),
-    );
+                  title: Text(
+                    transations[index].title,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  subtitle:
+                      Text(DateFormat.yMMMd().format(transations[index].date)),
+                  trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => deleteTx(transations[index].id)),
+                ),
+              );
+            },
+            itemCount: transations.length,
+          );
   }
 }
