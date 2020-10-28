@@ -104,9 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransations),
-            TransationList(
-              _userTransations,
-              _deleteTransation,
+            Expanded(
+                          child: TransationList(
+                _userTransations,
+                _deleteTransation,
+              ),
             )
           ],
         ),
